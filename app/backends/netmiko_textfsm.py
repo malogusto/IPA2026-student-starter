@@ -53,14 +53,15 @@ def _connect(router):
 
 
 def _parsed(connection, command):
-    output = connection.send_command(command, use_textfsm=True)
-    if isinstance(output, list):
-        return output
-    # Unparsed text: an absent interface yields an IOS error message.
-    text = output.lower()
+    from ntc_templates.parse import parse_output
+
+    raw = connection.send_command(command)
+    # An absent interface yields an IOS error message, which the
+    # TextFSM template would reject, so check the raw text first.
+    text = raw.lower()
     if "invalid input" in text or "not found" in text or not text.strip():
         return []
-    raise RuntimeError(f"TextFSM could not parse: {command}")
+    return parse_output(platform="cisco_ios", command=command, data=raw)
 
 
 def _read(connection, interface_name):
