@@ -1,0 +1,10 @@
+fixture: 05-student-update-ipv4-only.yaml
+
+expected:
+  status: ok
+  result: planned
+  operation: update
+  changes:
+    ipv4:
+      from: 10.45.1.9/32
+      to: 10.45.1.1/32

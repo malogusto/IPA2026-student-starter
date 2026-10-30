@@ -1,0 +1,11 @@
+desired:
+  name: Loopback4501
+  ipv4: 10.45.1.1/32
+  description: STUDENT-IPV4
+  admin_state: down
+
+current:
+  name: Loopback4501
+  ipv4: 10.45.1.9/32
+  description: STUDENT-IPV4
+  admin_state: down
